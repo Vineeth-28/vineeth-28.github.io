@@ -1,0 +1,445 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vineet Prakash — Backend Engineer who also knows DevOps</title>
+<meta name="description" content="Vineet Prakash — Backend Engineer (Node.js, TypeScript) who also knows DevOps. APIs, Redis, MongoDB, queues, real-time systems, plus Docker, CI/CD, Terraform and AWS. I build it. I ship it. I run it.">
+<meta property="og:title" content="Vineet Prakash — Backend Engineer who also knows DevOps">
+<meta property="og:description" content="I build backend services, and I know how to ship and run them.">
+<meta name="theme-color" content="#0b1220">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0b1220; --bg2:#0f1a2e; --card:#111c33; --line:#22314f;
+  --text:#e6edf7; --muted:#93a4c0; --accent:#38bdf8; --accent2:#818cf8;
+  --ok:#34d399; --warn:#fbbf24; --radius:16px;
+  --mono:'JetBrains Mono',ui-monospace,Menlo,Consolas,monospace;
+  --sans:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+}
+:root[data-theme="light"]{
+  --bg:#f6f8fc; --bg2:#eef2f9; --card:#ffffff; --line:#d8e0ee;
+  --text:#0f172a; --muted:#51607a; --accent:#0284c7; --accent2:#4f46e5;
+  --ok:#059669; --warn:#b45309;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.6;overflow-x:hidden;
+  background-image:radial-gradient(1200px 600px at 80% -10%,rgba(56,189,248,.12),transparent 60%),
+                   radial-gradient(900px 500px at -10% 20%,rgba(129,140,248,.10),transparent 60%);
+  background-attachment:fixed}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+.mono{font-family:var(--mono)}
+
+/* progress bar */
+#progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2));z-index:100}
+
+/* nav */
+nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);background:color-mix(in srgb,var(--bg) 80%,transparent);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{font-family:var(--mono);font-weight:700;font-size:.95rem}
+.logo span{color:var(--accent)}
+.links{display:flex;gap:6px;align-items:center}
+.links a{font-size:.88rem;color:var(--muted);padding:6px 12px;border-radius:8px;transition:.2s}
+.links a:hover,.links a.active{color:var(--text);background:var(--bg2)}
+.icon-btn{background:var(--bg2);border:1px solid var(--line);color:var(--text);width:36px;height:36px;border-radius:10px;cursor:pointer;font-size:1rem}
+@media(max-width:720px){.links a:not(.cta-link){display:none}}
+
+/* hero */
+.hero{padding:70px 0 40px;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+@media(max-width:900px){.hero{grid-template-columns:1fr;padding-top:40px}}
+.badge{display:inline-flex;gap:8px;align-items:center;font-size:.8rem;font-family:var(--mono);color:var(--ok);
+  border:1px solid color-mix(in srgb,var(--ok) 40%,transparent);background:color-mix(in srgb,var(--ok) 10%,transparent);padding:6px 12px;border-radius:999px}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 0 var(--ok);animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 10px transparent}100%{box-shadow:0 0 0 0 transparent}}
+h1{font-size:clamp(2.4rem,6vw,4rem);line-height:1.05;margin:18px 0 12px;font-weight:800;letter-spacing:-.03em}
+.grad{background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{color:var(--muted);font-size:1.1rem;max-width:560px}
+.typed{font-family:var(--mono);color:var(--accent);min-height:1.6em;margin:14px 0 24px;font-size:1.05rem}
+.caret{display:inline-block;width:9px;height:1.1em;background:var(--accent);vertical-align:-2px;margin-left:2px;animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:0}}
+.btns{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-flex;gap:8px;align-items:center;padding:12px 20px;border-radius:12px;font-weight:600;font-size:.95rem;border:1px solid var(--line);transition:.2s;cursor:pointer;background:var(--card);color:var(--text)}
+.btn:hover{transform:translateY(-2px);border-color:var(--accent)}
+.btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#04101f;border:none}
+.btn.primary:hover{box-shadow:0 10px 30px -10px var(--accent)}
+
+/* terminal */
+.term{background:#070d19;border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 30px 60px -30px rgba(0,0,0,.6);overflow:hidden;font-family:var(--mono);font-size:.82rem;color:#cdd9ee}
+.term-bar{display:flex;gap:7px;padding:12px 14px;background:#0c1527;border-bottom:1px solid #1b2a47;align-items:center}
+.term-bar i{width:11px;height:11px;border-radius:50%;display:block}
+.term-bar i:nth-child(1){background:#ff5f57}.term-bar i:nth-child(2){background:#febc2e}.term-bar i:nth-child(3){background:#28c840}
+.term-bar span{margin-left:10px;color:#6b7fa3;font-size:.75rem}
+.term-body{padding:16px;min-height:290px;white-space:pre-wrap}
+.term .p{color:#38bdf8}.term .g{color:#34d399}.term .y{color:#fbbf24}.term .d{color:#6b7fa3}
+
+/* sections */
+section{padding:70px 0}
+.eyebrow{font-family:var(--mono);color:var(--accent);font-size:.85rem;display:flex;gap:10px;align-items:center}
+.eyebrow b{color:var(--muted);font-weight:400}
+h2{font-size:clamp(1.7rem,4vw,2.4rem);margin:8px 0 14px;letter-spacing:-.02em}
+.sub{color:var(--muted);max-width:640px}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s}
+.reveal.in{opacity:1;transform:none}
+
+/* pipeline */
+.pipe{display:flex;align-items:center;gap:0;margin-top:34px;overflow-x:auto;padding-bottom:10px}
+.stage{flex:1;min-width:120px;text-align:center;position:relative}
+.stage .node{width:52px;height:52px;border-radius:50%;margin:0 auto 8px;display:grid;place-items:center;font-size:1.2rem;
+  background:var(--card);border:2px solid var(--line);transition:.4s}
+.stage .name{font-family:var(--mono);font-size:.75rem;color:var(--muted)}
+.stage:not(:last-child)::after{content:"";position:absolute;top:26px;left:calc(50% + 30px);width:calc(100% - 60px);height:2px;background:var(--line)}
+.stage:not(:last-child)::before{content:"";position:absolute;top:26px;left:calc(50% + 30px);height:2px;width:0;background:var(--ok);transition:width .5s;z-index:1}
+.stage.done .node{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 15%,var(--card))}
+.stage.done .name{color:var(--ok)}
+.stage.done:not(:last-child)::before{width:calc(100% - 60px)}
+.stage.run .node{border-color:var(--warn);animation:spin 1s linear infinite}
+@keyframes spin{50%{transform:scale(1.1)}}
+
+/* about */
+.about{display:grid;grid-template-columns:1.2fr .8fr;gap:30px;margin-top:26px}
+@media(max-width:860px){.about{grid-template-columns:1fr}}
+.about p{color:var(--muted);margin-bottom:14px}
+.about strong{color:var(--text)}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px}
+.stat .n{font-size:2rem;font-weight:800;font-family:var(--mono);color:var(--accent)}
+.stat .l{color:var(--muted);font-size:.82rem}
+
+/* filter + projects */
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin:26px 0}
+.chip{font-family:var(--mono);font-size:.8rem;padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--muted);cursor:pointer;transition:.2s}
+.chip.on,.chip:hover{color:var(--text);border-color:var(--accent)}
+.chip.on{background:color-mix(in srgb,var(--accent) 15%,var(--card))}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:18px}
+.card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px;display:flex;flex-direction:column;gap:12px;transition:transform .25s,border-color .25s,box-shadow .25s;overflow:hidden}
+.card::before{content:"";position:absolute;inset:0;background:radial-gradient(400px circle at var(--mx,50%) var(--my,0%),color-mix(in srgb,var(--accent) 14%,transparent),transparent 40%);opacity:0;transition:opacity .3s;pointer-events:none}
+.card:hover{transform:translateY(-4px);border-color:var(--accent)}
+.card:hover::before{opacity:1}
+.card.feat{border-color:color-mix(in srgb,var(--accent2) 60%,var(--line))}
+.tagline{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:.72rem}
+.type{color:var(--accent)}
+.star{color:var(--warn)}
+.card h3{font-size:1.1rem;letter-spacing:-.01em}
+.card p{color:var(--muted);font-size:.9rem;flex:1}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tags span{font-family:var(--mono);font-size:.7rem;padding:3px 9px;border-radius:6px;background:var(--bg2);color:var(--muted);border:1px solid var(--line)}
+.go{font-family:var(--mono);font-size:.8rem;color:var(--accent)}
+.card.hide{display:none}
+
+/* stack */
+.stack{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;margin-top:28px}
+.group{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px}
+.group h4{font-family:var(--mono);font-size:.82rem;color:var(--accent);margin-bottom:12px}
+.pills{display:flex;flex-wrap:wrap;gap:8px}
+.pill{font-size:.84rem;padding:6px 12px;border-radius:10px;background:var(--bg2);border:1px solid var(--line);transition:.2s}
+.pill:hover{border-color:var(--accent);transform:translateY(-2px)}
+.pill.learn{border-style:dashed;color:var(--muted)}
+
+/* roadmap */
+.road{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-top:28px}
+.rcard{background:var(--card);border:1px dashed var(--line);border-radius:var(--radius);padding:20px}
+.rcard h4{margin-bottom:6px}
+.rcard p{color:var(--muted);font-size:.88rem}
+.bar{height:6px;background:var(--bg2);border-radius:99px;margin-top:14px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:99px;transition:width 1.4s cubic-bezier(.2,.8,.2,1)}
+
+/* contact */
+.contact{text-align:center;background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 10%,var(--card)),color-mix(in srgb,var(--accent2) 10%,var(--card)));border:1px solid var(--line);border-radius:24px;padding:60px 24px}
+.contact .ok{font-family:var(--mono);color:var(--ok);font-size:.9rem}
+.contact h2{margin:14px 0}
+.contact p{color:var(--muted);max-width:560px;margin:0 auto 26px}
+.contact .btns{justify-content:center}
+footer{padding:36px 0 50px;text-align:center;color:var(--muted);font-size:.85rem;font-family:var(--mono)}
+footer a{color:var(--accent)}
+#toast{position:fixed;bottom:24px;left:50%;transform:translate(-50%,80px);background:var(--card);border:1px solid var(--ok);color:var(--text);padding:10px 18px;border-radius:12px;font-size:.88rem;transition:.3s;z-index:200}
+#toast.show{transform:translate(-50%,0)}
+
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<nav>
+  <div class="wrap">
+    <a class="logo" href="#top">vineet<span>@</span>prod:~$</a>
+    <div class="links">
+      <a href="#about">about</a>
+      <a href="#projects">projects</a>
+      <a href="#stack">stack</a>
+      <a href="#roadmap">roadmap</a>
+      <a href="#contact" class="cta-link">hire me</a>
+      <button class="icon-btn" id="theme" aria-label="Toggle theme">🌙</button>
+    </div>
+  </div>
+</nav>
+
+<main id="top" class="wrap">
+
+  <!-- HERO -->
+  <header class="hero">
+    <div>
+      <span class="badge"><i class="dot"></i> open to Backend Engineer roles</span>
+      <h1>Hi, I'm <span class="grad">Vineet</span>.<br>I build it. Ship it. Run it.</h1>
+      <p class="lead">Backend engineer who also knows how to ship what he builds: APIs in Node.js and TypeScript on Redis and MongoDB, plus the <strong>DevOps skills</strong> (Docker, CI/CD, Terraform, AWS) to take them from code to production.</p>
+      <div class="typed"><span id="typed"></span><span class="caret"></span></div>
+      <div class="btns">
+        <a class="btn primary" href="#contact">Hire me →</a>
+        <a class="btn" href="#projects">See my work</a>
+        <a class="btn" href="https://github.com/Vineeth-28" target="_blank" rel="noopener">GitHub ↗</a>
+      </div>
+    </div>
+
+    <div class="term" aria-label="Terminal showing a summary of Vineet">
+      <div class="term-bar"><i></i><i></i><i></i><span>vineet@prod — zsh</span></div>
+      <div class="term-body" id="term"></div>
+    </div>
+  </header>
+
+  <!-- PIPELINE -->
+  <section id="pipeline" style="padding-top:20px">
+    <div class="eyebrow">// <b>my pipeline, live</b></div>
+    <h2>Every project goes through this</h2>
+    <p class="sub">The DevOps side of how I work: backend code goes through every stage before it ships.</p>
+    <div class="pipe" id="pipe">
+      <div class="stage"><div class="node">📝</div><div class="name">commit</div></div>
+      <div class="stage"><div class="node">🔨</div><div class="name">build</div></div>
+      <div class="stage"><div class="node">🧪</div><div class="name">test</div></div>
+      <div class="stage"><div class="node">🛡️</div><div class="name">scan</div></div>
+      <div class="stage"><div class="node">🚀</div><div class="name">deploy</div></div>
+      <div class="stage"><div class="node">📈</div><div class="name">monitor</div></div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="reveal">
+    <div class="eyebrow">stage 1/5 <b>· about</b></div>
+    <h2>Backend engineer who ships his own code</h2>
+    <div class="about">
+      <div>
+        <p>Most engineers are either <strong>backend developers</strong> or <strong>DevOps engineers</strong>. My core is <strong>backend</strong>: REST and tRPC APIs with <strong>validation, caching, structured logging and request tracing</strong>, plus <strong>real-time and async systems</strong> built on Socket.IO, JWT auth and BullMQ job queues.</p>
+        <p>On top of that I bring the DevOps skills most backend developers hand off. Infrastructure is <strong>Terraform</strong>, services run in <strong>Docker</strong>, and paths to production go through <strong>GitHub Actions</strong>, so I can take what I build to production myself.</p>
+        <p>The result: services that are easy to containerize, deploy, observe and scale, because I've been on both sides of the handoff.</p>
+      </div>
+      <div class="stats">
+        <div class="stat"><div class="n" id="repoCount" data-fallback="8">8</div><div class="l">public repos</div></div>
+        <div class="stat"><div class="n">100%</div><div class="l">infra as code</div></div>
+        <div class="stat"><div class="n">2</div><div class="l">CI/CD tools: Actions + Jenkins</div></div>
+        <div class="stat"><div class="n">SAA</div><div class="l">AWS cert in progress</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="reveal">
+    <div class="eyebrow">stage 2/5 <b>· projects</b></div>
+    <h2>Things I've built and shipped</h2>
+    <p class="sub">Backend first, with the infrastructure to ship it. Click through for setup instructions and design decisions.</p>
+    <div class="filters" id="filters">
+      <button class="chip on" data-f="all">all</button>
+      <button class="chip" data-f="backend">backend</button>
+      <button class="chip" data-f="devops">devops</button>
+      <button class="chip" data-f="cloud">cloud / iac</button>
+    </div>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <!-- STACK -->
+  <section id="stack" class="reveal">
+    <div class="eyebrow">stage 3/5 <b>· stack</b></div>
+    <h2>Tools I use</h2>
+    <p class="sub">Solid line = used in projects. Dashed = actively learning.</p>
+    <div class="stack" id="stackGrid"></div>
+  </section>
+
+  <!-- ROADMAP -->
+  <section id="roadmap" class="reveal">
+    <div class="eyebrow">stage 4/5 <b>· roadmap</b></div>
+    <h2>What I'm working on now</h2>
+    <p class="sub">I keep learning in public. Here's what's next.</p>
+    <div class="road">
+      <div class="rcard"><h4>🧩 Deeper backend work</h4><p>System design, data structures and algorithms, and tests for my APIs.</p><div class="bar"><i data-w="40"></i></div></div>
+      <div class="rcard"><h4>🐹 Go</h4><p>Writing small, fast services and CLI tools.</p><div class="bar"><i data-w="25"></i></div></div>
+      <div class="rcard"><h4>☸️ Kubernetes in production</h4><p>Manifests, probes, HPA, Ingress, monitoring and logging.</p><div class="bar"><i data-w="65"></i></div></div>
+      <div class="rcard"><h4>🎓 AWS SAA-C03</h4><p>AWS Certified Solutions Architect – Associate, in progress.</p><div class="bar"><i data-w="50"></i></div></div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="reveal">
+    <div class="contact">
+      <div class="ok">✓ all stages passed — ready to deploy</div>
+      <h2>Let's build something reliable.</h2>
+      <p>I'm looking for a <strong>Backend Engineer</strong> role (Node.js / TypeScript) where I can own services from code to production. My DevOps background also fits Platform and Cloud teams.</p>
+      <div class="btns">
+        <a class="btn primary" href="mailto:VineetPrakash918@gmail.com">📧 Email me</a>
+        <button class="btn" id="copy">Copy email</button>
+        <a class="btn" href="https://github.com/Vineeth-28" target="_blank" rel="noopener">GitHub ↗</a>
+      </div>
+      <p class="mono" style="margin-top:22px;font-size:.85rem">📍 Noida, India · VineetPrakash918@gmail.com</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  Build reliable services · Ship them yourself · Keep learning<br>
+  © 2026 Vineet Prakash · plain HTML/CSS/JS, no framework, no build step ·
+  <a href="https://github.com/Vineeth-28/vineeth-28.github.io" target="_blank" rel="noopener">view source</a>
+</footer>
+<div id="toast">Email copied ✓</div>
+
+<script>
+(function(){
+  const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- data ---------- */
+  const projects = [
+    {n:'URL Shortener API',t:'backend',cat:['backend'],feat:true,
+     d:'Backend-only service with validated tRPC procedures, compact Base62 codes from an atomic Redis counter, Redis-cached URL mappings, a controller / service / repository structure, request correlation IDs and structured Winston logging.',
+     tags:['TypeScript','Express','tRPC','MongoDB','Redis','Zod','Winston'],u:'https://github.com/Vineeth-28/ShortUrl-'},
+    {n:'Slack Backend',t:'backend',cat:['backend'],feat:true,
+     d:'REST API and real-time messaging backend: JWT auth, workspaces with join codes and admin/member roles, channels, messages saved to MongoDB then broadcast over Socket.IO with paginated history, plus async bulk email on BullMQ and Redis with retries and a shared rate limit.',
+     tags:['Node.js','Express','MongoDB','Socket.IO','Redis','BullMQ','JWT','Zod'],u:'https://github.com/Vineeth-28/Slack-Backend'},
+    {n:'AWS Infrastructure with Terraform',t:'cloud',cat:['cloud','devops'],feat:true,
+     d:'Full AWS stack as code (VPC, ALB, ASG, RDS, Secrets Manager, S3) with a GitHub Actions deploy pipeline.',
+     tags:['Terraform','AWS','GitHub Actions'],u:'https://github.com/Vineeth-28/Assignment'},
+    {n:'Multi-Tier-Terraform',t:'cloud',cat:['cloud'],
+     d:'Multi-tier AWS architecture (VPC, subnets, EC2, security groups): modular, variable-driven, reproducible.',
+     tags:['Terraform','AWS','IaC'],u:'https://github.com/Vineeth-28/Multi-Tier-Terraform'},
+    {n:'CI/CD: Matrix Testing & Deployment',t:'devops',cat:['devops'],
+     d:'3-stage pipeline: matrix tests across Python versions, Docker build & push, deploy via self-hosted runner.',
+     tags:['GitHub Actions','Docker','Python'],u:'https://github.com/Vineeth-28/Matrix-Strategy-Github-Actions'},
+    {n:'Ubuntu Provisioning Script',t:'cloud',cat:['cloud'],
+     d:'One script to provision, secure and configure an AWS Ubuntu instance with essential utilities and Docker.',
+     tags:['Bash','AWS','Docker'],u:'https://github.com/Vineeth-28/Starting-Shell-Script-for-Ubuntu-'}
+  ];
+  const stack = [
+    ['Backend',['Node.js','TypeScript','Express','tRPC','Socket.io','JWT','Zod','BullMQ']],
+    ['Data',['MongoDB','Redis']],
+    ['Cloud',['AWS','EC2','S3','IAM','VPC','RDS','ALB']],
+    ['Containers & IaC',['Docker','Kubernetes','Terraform']],
+    ['CI/CD & Security',['GitHub Actions','Jenkins','Trivy','Gitleaks']],
+    ['Linux & Tools',['Linux','Bash','systemd','Nginx','Git']],
+    ['Learning',['Go','System design','DSA','Helm','HPA / Ingress'],true]
+  ];
+
+  /* ---------- render projects ---------- */
+  const grid = $('#grid');
+  grid.innerHTML = projects.map(p => `
+    <a class="card ${p.feat?'feat':''}" href="${p.u}" target="_blank" rel="noopener" data-cat="${p.cat.join(' ')}">
+      <div class="tagline"><span class="type">${p.t.toUpperCase()}</span>${p.feat?'<span class="star">★ featured</span>':''}</div>
+      <h3>${p.n}</h3><p>${p.d}</p>
+      <div class="tags">${p.tags.map(t=>`<span>${t}</span>`).join('')}</div>
+      <span class="go">view repo →</span>
+    </a>`).join('');
+  grid.addEventListener('pointermove', e => {
+    const c = e.target.closest('.card'); if(!c) return;
+    const r = c.getBoundingClientRect();
+    c.style.setProperty('--mx', (e.clientX-r.left)+'px');
+    c.style.setProperty('--my', (e.clientY-r.top)+'px');
+  });
+  $('#filters').addEventListener('click', e => {
+    const b = e.target.closest('.chip'); if(!b) return;
+    $$('.chip').forEach(c => c.classList.toggle('on', c===b));
+    const f = b.dataset.f;
+    $$('.card').forEach(c => c.classList.toggle('hide', f!=='all' && !c.dataset.cat.split(' ').includes(f)));
+  });
+
+  /* ---------- render stack ---------- */
+  $('#stackGrid').innerHTML = stack.map(([h,items,learn]) => `
+    <div class="group"><h4>${learn?'// learning':'// '+h.toLowerCase()}</h4>
+    <div class="pills">${items.map(i=>`<span class="pill ${learn?'learn':''}">${i}</span>`).join('')}</div></div>`).join('');
+
+  /* ---------- terminal hero ---------- */
+  const lines = [
+    ['<span class="p">vineet@prod</span>:~$ whoami', 400],
+    ['Vineet Prakash — Backend Engineer (+ DevOps)', 250],
+    ['<span class="p">vineet@prod</span>:~$ cat skills.txt', 500],
+    ['<span class="g">backend </span> node · typescript · redis · mongodb · socket.io · bullmq', 120],
+    ['<span class="g">infra   </span> terraform · aws · docker · k8s', 120],
+    ['<span class="g">cicd    </span> github actions · jenkins · trivy', 120],
+    ['<span class="p">vineet@prod</span>:~$ ./deploy.sh --env prod', 600],
+    ['<span class="d">[1/6]</span> build ............ <span class="g">ok</span>', 300],
+    ['<span class="d">[2/6]</span> test ............. <span class="g">ok</span>', 300],
+    ['<span class="d">[3/6]</span> scan (trivy) ..... <span class="g">0 critical</span>', 300],
+    ['<span class="d">[4/6]</span> deploy (rolling) . <span class="g">ok</span>', 300],
+    ['<span class="d">[5/6]</span> health checks .... <span class="g">ok</span>', 300],
+    ['<span class="g">✓ available for hire</span> <span class="y">→ VineetPrakash918@gmail.com</span>', 0]
+  ];
+  const term = $('#term');
+  if(reduce){ term.innerHTML = lines.map(l=>l[0]).join('\n'); }
+  else { let i=0; (function next(){ if(i>=lines.length) return; term.innerHTML += (i?'\n':'')+lines[i][0]; setTimeout(next, lines[i++][1]+150); })(); }
+
+  /* ---------- typed roles ---------- */
+  const roles = ['Backend Engineer (Node.js | TypeScript)','APIs | Redis | MongoDB | Queues | Real-time','...who also ships it: Docker | CI/CD | Terraform | AWS','I build it. I ship it. I run it.'];
+  const typed = $('#typed');
+  if(reduce){ typed.textContent = roles.join(' · '); }
+  else { let r=0,c=0,del=false;
+    (function tick(){
+      const w = roles[r];
+      typed.textContent = '> ' + w.slice(0,c);
+      if(!del && c===w.length){ del=true; return setTimeout(tick,1400); }
+      if(del && c===0){ del=false; r=(r+1)%roles.length; }
+      c += del?-1:1; setTimeout(tick, del?35:70);
+    })(); }
+
+  /* ---------- pipeline animation ---------- */
+  const stages = $$('.stage'); let started = false;
+  function runPipe(){
+    if(started) return; started = true;
+    stages.forEach((s,i) => {
+      setTimeout(()=>s.classList.add('run'), reduce?0:i*600);
+      setTimeout(()=>{s.classList.remove('run');s.classList.add('done')}, reduce?0:i*600+550);
+    });
+  }
+  new IntersectionObserver((e,o)=>{ if(e[0].isIntersecting){ runPipe(); o.disconnect(); } },{threshold:.4}).observe($('#pipe'));
+  $('#pipe').addEventListener('click', ()=>{ started=false; stages.forEach(s=>s.classList.remove('done','run')); setTimeout(runPipe,100); });
+
+  /* ---------- reveal + progress bars + nav highlight ---------- */
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if(e.isIntersecting){
+      e.target.classList.add('in');
+      e.target.querySelectorAll('.bar i').forEach(b => b.style.width = b.dataset.w+'%');
+      io.unobserve(e.target);
+    }
+  }),{threshold:.15});
+  $$('.reveal').forEach(el => io.observe(el));
+
+  const navLinks = $$('.links a[href^="#"]');
+  const spy = new IntersectionObserver(es => es.forEach(e => {
+    if(e.isIntersecting) navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href')==='#'+e.target.id));
+  }),{rootMargin:'-45% 0px -50% 0px'});
+  ['about','projects','stack','roadmap','contact'].forEach(id => spy.observe(document.getElementById(id)));
+
+  addEventListener('scroll', () => {
+    const h = document.documentElement;
+    $('#progress').style.width = (h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';
+  },{passive:true});
+
+  /* ---------- live repo count (falls back silently) ---------- */
+  fetch('https://api.github.com/users/Vineeth-28')
+    .then(r => r.ok ? r.json() : Promise.reject())
+    .then(u => { if(u && typeof u.public_repos === 'number') $('#repoCount').textContent = u.public_repos; })
+    .catch(()=>{});
+
+  /* ---------- theme ---------- */
+  const root = document.documentElement, tbtn = $('#theme');
+  let saved = null; try{ saved = localStorage.getItem('theme'); }catch(e){}
+  const set = t => { root.dataset.theme = t; tbtn.textContent = t==='light'?'☀️':'🌙'; try{localStorage.setItem('theme',t)}catch(e){} };
+  set(saved || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'));
+  tbtn.addEventListener('click', () => set(root.dataset.theme==='light'?'dark':'light'));
+
+  /* ---------- copy email ---------- */
+  $('#copy').addEventListener('click', async () => {
+    try{ await navigator.clipboard.writeText('VineetPrakash918@gmail.com'); }catch(e){}
+    const t = $('#toast'); t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),1800);
+  });
+})();
+</script>
+</body>
+</html>
